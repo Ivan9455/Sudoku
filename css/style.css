@@ -22,3 +22,18 @@ input{
     height: 26px;
     float: left;
 }
+.inputs{
+    width: 462px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+.read{
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 12px;
+    text-align: center;
+    background: chartreuse;
+    cursor: pointer;
+}
