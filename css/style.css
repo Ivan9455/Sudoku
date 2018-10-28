@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.sudoku{
+    width: 462px;
+    height: 462px;
+    margin: 0 auto;
+}
+.block{
+    width: 154px;
+    height: 154px;
+    float: left;
+    background:rosybrown;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+input{
+    text-align: center;
+    margin: 10px;
+    width: 26px;
+    height: 26px;
+    float: left;
+}
