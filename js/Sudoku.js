@@ -52,7 +52,64 @@ let Sudoku = {
             Sudoku.readBlock();
             Sudoku.readLine();
             Sudoku.readCol();
+            console.log(Sudoku.maxLengthElement(Sudoku.arrMaxLengthElement(Sudoku.matrixBlock), "block"));
+            console.log(Sudoku.maxLengthElement(Sudoku.arrMaxLengthElement(Sudoku.matrixLine), "line"));
+            console.log(Sudoku.maxLengthElement(Sudoku.arrMaxLengthElement(Sudoku.matrixCol), "col"));
         })
+    },
+    searchDecision: function () {
+        let block = Sudoku.maxLengthElement(Sudoku.arrMaxLengthElement(Sudoku.matrixBlock), "block");
+        let line = Sudoku.maxLengthElement(Sudoku.arrMaxLengthElement(Sudoku.matrixLine), "line");
+        let col = Sudoku.maxLengthElement(Sudoku.arrMaxLengthElement(Sudoku.matrixCol), "col");
+        let res = {};
+        if (block.item >= line.item && block.item >= col.item) {
+            res = block;
+        }
+        else if (line.item >= col.item) {
+            res = line;
+        }
+        else {
+            res = col;
+        }
+        Sudoku.info.elem = res.elem;
+        switch (Sudoku.info.elem) {
+            case "block":
+                Sudoku.info.block = res.i;
+                break;
+            case "line":
+                Sudoku.info.line = res.i;
+                break;
+            case "col":
+                Sudoku.info.col = res.i;
+                break;
+            default:
+                break;
+        }
+    },
+    maxLengthElement: function (arr, elem) {
+        let obj = {};
+        obj.item = 0;
+        obj.elem = elem;
+        for (let i = 0; i < 9; i++) {
+            if (arr[i] >= obj.item) {
+                obj.item = arr[i];
+                obj.i = i;
+            }
+        }
+        return obj;
+    },
+    arrMaxLengthElement: function (arr) {
+        let mass = [];
+        for (let i = 0; i < 9; i++) {
+            let str = 0;
+            for (let j = 0; j < 9; j++) {
+                if (arr[i][j] !== "") {
+                    str++;
+                }
+            }
+            mass[i] = str;
+        }
+        return mass;
     },
     testBlockMatrix: [
         ["5", "", "", "", "1", "", "9", "", "2"],
@@ -69,8 +126,14 @@ let Sudoku = {
         for (let i = 0; i < 9; i++) {
             for (let j = 0; j < 9; j++) {
                 $(".block_" + (i + 1))[j].value = Sudoku.testBlockMatrix[i][j];
-
             }
         }
+    },
+    info:{
+        elem:"none",
+        block:0,
+        line:0,
+        col:0,
+        tick:0
     }
 };
